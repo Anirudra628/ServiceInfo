@@ -15,7 +15,7 @@ const Users = new mongoose.Schema({
         required: true
     },
     serviceid :{
-        type: String
+        type: Array
     }
 });
 

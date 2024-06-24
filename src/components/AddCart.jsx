@@ -1,58 +1,78 @@
 import Cart from "./Cart"
 import "./AddCart.css"
 import React, { useEffect, useState, useContext } from "react";
-import Buy from "./Buy"
-import Signup from "./Signup";
-
-import { useNavigate } from "react-router-dom";
+import Buy from "./Buy";
+import { useLocation,useNavigate } from "react-router-dom";
 import Login from "./Login";
 
 const AddCart = (props) => {
-
-    const [login, setlogin] = useState(false);
     let route = '/cart';
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
+    const location = useLocation();
+    const obj = location.state?. obj || {};
+    let serviceId = obj._id;
     let flag = false;
     const toggleModal = () => {
         setModal(!modal);
     };
 
-    const [deletecart, sedelete] = useState([<Cart price={10000} />, <Cart price={10000} />, <Cart price={10000} />]);
+    const [cartitems, sedelete] = useState(obj);
     const [totsum, deletesum] = useState();
     let sum = 0;
+    if (localStorage.getItem('islogin')){
+        flag = true;
+        
+    }
+
+    const linkservice = async()=>{
+        let response = await fetch("http://localhost:3000/addcart",{
+            method: 'POST',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: localStorage.getItem('islogin'),
+                serviceId: serviceId
+            })
+        });
+
+        response = await response.json();
+        if(!response.error){
+            flag = true;
+        }
+        else{
+            alert(response.error);
+        }
+    }
     const handelDelete = (deleteItem) => {
-        let afterDelete = deletecart.filter((item) => item != deleteItem);
+        let afterDelete = cartitems.filter((item) => item != deleteItem);
         //console.log(afterDelete);
         sedelete(afterDelete);
         deletesum(totsum - 10000);
     }
     const calculatesum = () => {
-        deletecart.map((item) => {
+        cartitems.map((item) => {
             sum = sum + 10000;
             deletesum(sum);
             console.log("lol");
         });
     }
-
     useEffect(() => {
-        console.log("Inside cart component");
-        console.log("flag inside cart" + " " + flag);
         calculatesum();
     }, []); 
 
-    if (localStorage.getItem('islogin'))
-        flag = true;
+    
+    if (flag){
 
-    if (flag)
         return (
             <div className="addCart">
                 <div className="cartLeft">
                     <h2>Cart Items</h2>
-                    {(deletecart.length === 0 && <p>There is no Item, in your Cart. Go back, and select Add to Cart opption to insert an item, inyour cart.</p>)}
-                    {deletecart.map((item) => (
+                    {(cartitems.length === 0 && <p>There is no Item, in your Cart. Go back, and select Add to Cart opption to insert an item, inyour cart.</p>)}
+                    {cartitems.map((item) => (
                         <>
-                            <Cart deletecart={item} key={deletecart.indexOf(item)} handledelete={handelDelete} />
+                            <Cart cartitems={item} key={cartitems.indexOf(item)} handledelete={handelDelete} />
                         </>
 
                     )
@@ -89,6 +109,7 @@ const AddCart = (props) => {
             </div>
 
         )
+    }
     else
         return <Login route = {route}/>
 }

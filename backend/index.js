@@ -126,6 +126,22 @@ app.get('/geteachservice',async(req,res)=>{
 
 });
 
+app.post('/addcart',async(req,res)=>{
+
+    const User = mongodb.model('User', Users);
+    
+    let existuser= User.findOne({email:req.body.email});
+
+    if(existuser){
+       // existuser = await existuser.json();
+        existuser.serviceId = req.body.serviceId;
+    // let newuser =  await existuser.save();
+    }
+
+    res.send(existuser);
+
+});
+
 mongodb.connect(url).then(
     console.log("Connected")
 );

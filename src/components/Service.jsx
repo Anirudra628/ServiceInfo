@@ -12,14 +12,11 @@ const Service = (props) => {
 
     const obj = props.obj;
     let {moredesc,duration,price} = obj;
-    useEffect(()=>{
-        console.log(props.title);
-        //console.log(moredesc);
-    },[]);
+    
 
     const details = async()=>{
         //closedetails(!opendetails);
-        navigate('/servicedetails', {state: {}});
+        navigate('/servicedetails', {state: {obj}});
     }
 
     
