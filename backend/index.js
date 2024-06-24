@@ -129,16 +129,19 @@ app.get('/geteachservice',async(req,res)=>{
 app.post('/addcart',async(req,res)=>{
 
     const User = mongodb.model('User', Users);
+    let newuser =  {};
     
-    let existuser= User.findOne({email:req.body.email});
+    let existuser= await User.findOne({email:req.body.email});
 
     if(existuser){
-       // existuser = await existuser.json();
-        existuser.serviceId = req.body.serviceId;
-    // let newuser =  await existuser.save();
+        //existuser = await existuser.json();
+        //existuser.serviceId = req.body.serviceId;
+      newuser =  existuser;
+      newuser.serviceid.push(req.body.serviceId);
+      await newuser.save();
     }
 
-    res.send(existuser);
+    res.send(newuser.serviceid);
 
 });
 

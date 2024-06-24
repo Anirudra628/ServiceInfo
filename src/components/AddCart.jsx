@@ -10,8 +10,8 @@ const AddCart = (props) => {
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const location = useLocation();
-    const obj = location.state?. obj || {};
-    let serviceId = obj._id;
+    const obj = location.state?. totalcartitems || [];
+    //let serviceId = obj._id;
     let flag = false;
     const toggleModal = () => {
         setModal(!modal);
@@ -25,26 +25,10 @@ const AddCart = (props) => {
         
     }
 
-    const linkservice = async()=>{
-        let response = await fetch("http://localhost:3000/addcart",{
-            method: 'POST',
-            headers : {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: localStorage.getItem('islogin'),
-                serviceId: serviceId
-            })
-        });
-
-        response = await response.json();
-        if(!response.error){
-            flag = true;
-        }
-        else{
-            alert(response.error);
-        }
-    }
+    useEffect(()=>{
+        console.log(obj);
+    },[]);  
+    
     const handelDelete = (deleteItem) => {
         let afterDelete = cartitems.filter((item) => item != deleteItem);
         //console.log(afterDelete);

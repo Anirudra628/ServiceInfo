@@ -13,6 +13,7 @@ const ServiceDetails = (props) => {
     const navigate = useNavigate();
     const obj = location.state?.obj || {};
     let totalcartitems = [];
+    let flag = false;
     const toggleModal = () => {
         setModal(!modal);
     };
@@ -29,13 +30,15 @@ const ServiceDetails = (props) => {
             },
             body: JSON.stringify({
                 email: localStorage.getItem('islogin'),
-                serviceId: serviceId
+                serviceid: obj._id
             })
         });
 
         response = await response.json();
-        if(!response.error){
+        if(response){
             flag = true;
+            console.log(response);
+            totalcartitems = response;
         }
         else{
             alert(response.error);
@@ -44,7 +47,8 @@ const ServiceDetails = (props) => {
     
     const gotoCart = ()=>{
         linkservice();
-        navigate('/cart',{state : {obj}});
+        console.log(totalcartitems);
+        //navigate('/cart',{state : {totalcartitems}});
     }
 
     return (
