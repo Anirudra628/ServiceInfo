@@ -1,0 +1,27 @@
+.headerRight{
+    flex-basis: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.signin{
+    text-decoration: none;
+    color: white;
+    margin-right: 30px;
+}
+.fCon{
+    display: flex;
+    align-items: center;
+}
+
+.fCon input{
+    margin-top: 17px;
+}
+
+.d-flex{
+    height: 50px;
+}
+
+.bName{
+    margin-left: 30px;
+}

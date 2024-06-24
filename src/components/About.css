@@ -1,0 +1,21 @@
+.abt {
+    display: flex;
+    justify-content: space-around;
+    height: 55vh;
+}
+.abtLeft{
+    width: 40%;
+    padding: 2%;
+   
+}
+.abtLeft p{
+    padding: 5% 5% 5% 0;
+}
+.abtRight{
+    width: 50%;
+}
+
+.abtRight img{
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,14 @@
+.servises{
+    margin: 20px;
+}
+
+.servisesContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.servisesContainer img{
+    width: 100%;
+    border-radius: 20px;
+    margin: 10px 0;
+}

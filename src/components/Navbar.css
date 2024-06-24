@@ -1,0 +1,27 @@
+.navContainer{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(246, 244, 249);
+    padding: 10px 20px;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 0;
+    right: 30%;
+    color: black;
+    border: 2px solid black;
+    z-index: 1;
+
+}
+
+.navContainer a{
+    text-decoration: none;
+    font-weight: 600;
+    color: rgb(4, 4, 4);
+}
+
+.navContainer a:hover{
+    text-decoration: none;
+    font-weight: bolder;
+    font-stretch: ultra-expanded;
+}

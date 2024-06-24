@@ -1,0 +1,7 @@
+.serviceContainer{
+    width: 30%;
+    border: 2px solid black;
+    padding: 10px 40px;
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(237, 224, 103), rgb(235, 180, 219));
+}
