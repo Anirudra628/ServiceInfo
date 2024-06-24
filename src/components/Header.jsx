@@ -41,6 +41,7 @@ const Header = () => {
                             <FaSearch />
                         </form>
                         <button onClick = {gotologin} className="signin">{login}</button>
+                        <h2></h2>
 
                         <Link to="/signup" className="signin">Signup</Link>
                     </div>
